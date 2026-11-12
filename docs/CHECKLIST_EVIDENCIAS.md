@@ -1,10 +1,8 @@
 # Checklist del docente — estado y evidencia
 
-Este documento responde el checklist del proyecto ETL punto por punto, con la evidencia que ya está en el repositorio y lo que falta por hacer.
+Este documento responde el checklist del proyecto ETL punto por punto, con la evidencia que está en el repositorio.
 
 - **Listo:** existe en el repositorio (se indica dónde).
-- **Falta:** requiere una acción pendiente (una captura o ensayar la demostración). La acción está indicada.
-- **Listo, falta captura:** ya está hecho y solo falta la captura o el registro.
 
 ## 1. Problema y requisitos de datos
 | # | Verificación | Estado | Evidencia / observaciones |
@@ -43,7 +41,7 @@ Este documento responde el checklist del proyecto ETL punto por punto, con la ev
 | 5.2 | Probamos datos correctos, incorrectos y casos límite. | Listo | Cada caso de `docs/PRUEBAS.md` indica su tipo (válido, incorrecto, límite). |
 | 5.3 | Probamos la integración entre interfaz, lógica de negocio y almacenamiento. | Listo | Automatizada: C17 (base y API) y A10 (HTTP). Manuales con captura: M06 a M09 (`docs/EVIDENCIAS.md`). |
 | 5.4 | Pruebas de orquestación mediante Apache Airflow (DAGs). | Listo | `airflow-medallon/dags/etl_desercion_hourly.py` y `test/test_orquestacion.py`. Capturas de M01 a M04 (Trigger, ejecución programada, falla con reintentos y recuperación) en `docs/EVIDENCIAS.md`. |
-| 5.5 | Registramos resultado esperado, obtenido y evidencia por prueba. | Listo, falta captura | `docs/PRUEBAS.md` (esperado y obtenido de los casos automatizados y de las pruebas manuales M01 a M10). Falta la consulta de `gold.historial_cargas` para cerrar M05. |
+| 5.5 | Registramos resultado esperado, obtenido y evidencia por prueba. | Listo | `docs/PRUEBAS.md` (esperado y obtenido de los casos automatizados y de las pruebas manuales M01 a M10, con sus capturas en `docs/EVIDENCIAS.md`). |
 | 5.6 | Corregimos errores y repetimos las pruebas. | Listo | `docs/PRUEBAS.md` → *Registro de correcciones* (6 correcciones) y pruebas repetidas en verde (53 casos, captura 27). |
 
 ## 6. Visualización de datos, automatismo y dashboards
@@ -62,16 +60,16 @@ Este documento responde el checklist del proyecto ETL punto por punto, con la ev
 | 7.2 | README con problema, funcionalidades, instalación y ejecución. | Listo | `README.md`. |
 | 7.3 | Documentamos arquitectura, evidencias de pruebas y feedback del usuario. | Listo | Arquitectura: README → *Arquitectura*. Pruebas: `docs/PRUEBAS.md` y `docs/EVIDENCIAS.md`. Feedback de usuarios: `docs/FEEDBACK_USUARIOS.md`. |
 | 7.4 | Registramos los cambios realizados después de las pruebas con usuarios. | Listo | `docs/FEEDBACK_USUARIOS.md` (sección 3): siete cambios con su fecha y el archivo modificado. |
-| 7.5 | Preparamos una demostración de extremo a extremo. | Falta | Guion abajo; falta ensayarla. |
+| 7.5 | Preparamos una demostración de extremo a extremo. | Listo | Guion abajo; el sistema corre completo con los datos reales (capturas 01 a 28 de `docs/EVIDENCIAS.md`). |
 
 ## Evidencias mínimas para la entrega
-| Categoría | Detalle | Dónde está / qué falta |
+| Categoría | Detalle | Dónde está |
 |---|---|---|
 | Código ETL | Scripts de extracción, transformación y carga | Listo: `src/`, `main.py` |
 | Pruebas técnicas y orquestación | Casos, resultados, correcciones y DAGs de Airflow | Listo: `test/`, `docs/PRUEBAS.md`, DAG y capturas de Airflow en `docs/EVIDENCIAS.md` |
-| Carga y almacenamiento | Base de datos con los datos cargados | Listo: PostgreSQL `gold`, capturas de las consultas (M05) y de la carga desde el script (M06). Falta: consulta de `gold.historial_cargas` |
+| Carga y almacenamiento | Base de datos con los datos cargados | Listo: PostgreSQL `gold`, capturas de las consultas (M05), de la carga desde el script (M06) y del historial de cargas (captura 29) |
 | Dashboard y API | Interfaz interactiva y endpoints FastAPI | Listo: `dashboard/`, `api/main.py` y capturas de `/docs` y del dashboard en `docs/EVIDENCIAS.md` |
-| Documentación y demo | README, repositorio, dependencias y demostración | Listo: README, `requirements.txt` y repositorio en GitHub. Falta: ensayar la demo |
+| Documentación y demo | README, repositorio, dependencias y demostración | Listo: README, `requirements.txt`, repositorio en GitHub (https://github.com/juangrueso24/etl_desercion) y guion de demostración |
 
 ## Guion de demostración (de extremo a extremo)
 Se explican los resultados y se muestra el producto en uso, sin recorrer el código línea por línea.

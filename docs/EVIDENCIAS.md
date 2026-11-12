@@ -96,6 +96,8 @@ Carga repetida. En una corrida programada posterior, `load_gold_postgres` vuelve
 
 ![Log de load_gold_postgres](capturas/08-airflow-load-gold-log.jpg)
 
+Historial de cargas. `gold.historial_cargas` guarda una fila por tabla en cada corrida y no se borra. La consulta muestra las 12 filas de las dos últimas corridas (la corrida manual de Airflow y la carga desde el script), 6 tablas por corrida. Salida completa: [`29-gold.historial_cargas.txt`](capturas/29-gold.historial_cargas.txt).
+
 **M06. Carga desde el script.** Primero ejecuté `python main.py --cargar` sin definir `DW_PASSWORD`: el script se detuvo con «Falta la variable de entorno DW_PASSWORD» y no usó ninguna clave escrita en el código ([`28a-carga-sin-clave.txt`](capturas/28a-carga-sin-clave.txt)). Después de cargar la contraseña desde `airflow-medallon/.env`, validó Gold, cargó las seis tablas y terminó bien en 4,42 segundos. La salida completa está en [`28-carga-desde-script.txt`](capturas/28-carga-desde-script.txt) y termina así:
 
 ```
@@ -137,8 +139,3 @@ Le mostré el dashboard a mi mamá y a un amigo, en dos rondas el mismo día. `d
 - Dependencias: `requirements.txt`.
 - Guion de la demostración de extremo a extremo: `docs/CHECKLIST_EVIDENCIAS.md` → *Guion de demostración*.
 - Conclusión: `README.md` → *Conclusión*.
-
-## Pendiente
-- **M05:** consultar `gold.historial_cargas` (README → *Persistencia histórica*) y guardar la salida como `docs/capturas/29-psql-historial-cargas.txt`.
-- **GitHub:** subir el proyecto sin `.env` a https://github.com/juangrueso24/etl_desercion.
-- **Demostración:** ensayarla con el guion de `docs/CHECKLIST_EVIDENCIAS.md`.
