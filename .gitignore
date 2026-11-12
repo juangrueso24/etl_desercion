@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+.env
+
+data/raw/*
+!data/raw/articles-415244_recurso_19.xlsx
+data/bronze/*
+data/silver/*
+data/gold/*
+
+logs/*.log
+airflow-medallon/logs/*

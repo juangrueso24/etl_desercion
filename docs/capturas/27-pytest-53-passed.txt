@@ -1,0 +1,75 @@
+PS C:\Users\grues\OneDrive\Escritorio\etl_desercion> (Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned) ; (& c:\Users\grues\OneDrive\Escritorio\etl_desercion\.venv\Scripts\Activate.ps1)
+(.venv) PS C:\Users\grues\OneDrive\Escritorio\etl_desercion> $env:DW_PASSWORD = (Select-String -Path airflow-medallon\.env -Pattern '^DW_PASSWORD=').Line.Split('=',2)[1]
+(.venv) PS C:\                                       ercion> 
+(.venv) PS C:\Users\grues\OneDrive\Escritorio\etl_desercion> .\.venv\Scripts\python.exe -m pytest -v
+=========================== test session starts ===========================
+platform win32 -- Python 3.13.13, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\grues\OneDrive\Escritorio\etl_desercion\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\grues\OneDrive\Escritorio\etl_desercion
+configfile: pytest.ini
+testpaths: test
+plugins: anyio-4.16.0, platformdirs-4.14.5
+collected 53 items                                                         
+
+test/test_api.py::test_a01_health PASSED                             [  1%]
+test/test_api.py::test_a02_health_sin_archivo PASSED                 [  3%]
+test/test_api.py::test_a03_gold_completo PASSED                      [  5%]
+test/test_api.py::test_a04_gold_data PASSED                          [  7%]
+test/test_api.py::test_a05_gold_indicadores PASSED                   [  9%]
+test/test_api.py::test_a06_codigo_departamento_con_cero PASSED       [ 11%]
+test/test_api.py::test_a07_json_sin_nan PASSED                       [ 13%]
+test/test_api.py::test_a08_archivo_inexistente PASSED                [ 15%]
+test/test_api.py::test_a09_preparar_dataframe_json PASSED            [ 16%]
+test/test_api.py::test_a10_endpoints_registrados PASSED              [ 18%]
+test/test_carga.py::test_c01_tipo_codigo_conserva_ceros PASSED       [ 20%]
+test/test_carga.py::test_c02_tipo_entero PASSED                      [ 22%]
+test/test_carga.py::test_c03_tipo_entero_grande PASSED               [ 24%]
+test/test_carga.py::test_c04_tipo_decimal PASSED                     [ 26%]
+test/test_carga.py::test_c05_tipo_booleano_con_vacios PASSED         [ 28%]
+test/test_carga.py::test_c06_tipo_todo_vacio PASSED                  [ 30%]
+test/test_carga.py::test_c07_tipo_ceros_a_la_izquierda PASSED        [ 32%]
+test/test_carga.py::test_c08_tipo_mezcla PASSED                      [ 33%]
+test/test_carga.py::test_c09_literal_escapa_comillas PASSED          [ 35%]
+test/test_carga.py::test_c10_sha256_archivo PASSED                   [ 37%]
+test/test_carga.py::test_c11_carga_completa PASSED                   [ 39%]
+test/test_carga.py::test_c12_codigo_conserva_cero_inicial PASSED     [ 41%]
+test/test_carga.py::test_c13_carga_repetida_no_duplica PASSED        [ 43%]
+test/test_carga.py::test_c14_llave_foranea_huerfana PASSED           [ 45%]
+test/test_carga.py::test_c15_fallo_conserva_datos_anteriores PASSED  [ 47%]
+test/test_carga.py::test_c16_csv_vacio PASSED                        [ 49%]
+test/test_carga.py::test_c17_integracion_api_y_base PASSED           [ 50%]
+test/test_orquestacion.py::test_o01_configuracion_del_dag PASSED     [ 52%]
+test/test_orquestacion.py::test_o02_tareas_del_dag PASSED            [ 54%]
+test/test_orquestacion.py::test_o03_identificador_de_corrida_sin_airflow PASSED [ 56%]
+test/test_orquestacion.py::test_o04_identificador_de_corrida_con_run_id PASSED [ 58%]
+test/test_orquestacion.py::test_o05_respaldos_conserva_los_ultimos PASSED [60%]
+test/test_orquestacion.py::test_o06_respaldos_carpeta_inexistente PASSED [ 62%]
+test/test_transformaciones.py::test_t01_normalizar_texto_valido PASSED [ 64%]
+test/test_transformaciones.py::test_t02_normalizar_texto_enie PASSED [ 66%]
+test/test_transformaciones.py::test_t03_normalizar_texto_nulo PASSED [ 67%]
+test/test_transformaciones.py::test_t04_normalizar_texto_solo_espacios PASSED [ 69%]
+test/test_transformaciones.py::test_t05_normalizar_departamento PASSED [ 71%]
+test/test_transformaciones.py::test_t06_nombre_canonico_alias PASSED [ 73%]
+test/test_transformaciones.py::test_t07_nombre_canonico_bogota_sin_punto PASSED [ 75%]
+test/test_transformaciones.py::test_t08_nombre_canonico_nulo PASSED  [ 77%]
+test/test_transformaciones.py::test_t09_convertir_booleano_valido_y_vacio PASSED [ 79%]
+test/test_transformaciones.py::test_t10_convertir_booleano_invalido PASSED [ 81%]
+test/test_transformaciones.py::test_t11_leer_booleano_vacio_es_invalido PASSED [ 83%]
+test/test_transformaciones.py::test_t12_convertir_numero_valido_y_vacio PASSED [ 84%]
+test/test_transformaciones.py::test_t13_convertir_numero_invalido PASSED [ 86%]
+test/test_validacion.py::test_v01_gold_real_valido PASSED            [ 88%]
+test/test_validacion.py::test_v02_clave_duplicada PASSED             [ 90%]
+test/test_validacion.py::test_v03_tasa_fuera_de_rango PASSED         [ 92%]
+test/test_validacion.py::test_v04_matricula_negativa PASSED          [ 94%]
+test/test_validacion.py::test_v05_columna_ausente PASSED             [ 96%]
+test/test_validacion.py::test_v06_archivo_ausente PASSED             [ 98%]
+test/test_validacion.py::test_v07_gold_vacio PASSED                  [100%]
+
+============================ warnings summary =============================
+test/test_api.py::test_a10_endpoints_registrados
+  C:\Users\grues\OneDrive\Escritorio\etl_desercion\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+===================== 53 passed, 1 warning in 13.66s ======================
+(.venv) PS C:\Users\grues\OneDrive\Escritorio\etl_desercion> 

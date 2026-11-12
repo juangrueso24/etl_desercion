@@ -1,0 +1,155 @@
+PS C:\Users\grues\OneDrive\Escritorio\etl_desercion> (Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned) ; (& c:\Users\grues\OneDrive\Escritorio\etl_desercion\.venv\Scripts\Activate.ps1)
+(.venv) PS C:\Users\grues\OneDrive\Escritorio\etl_desercion> python main.py --cargar
+2026-11-11 18:41:09,470 | INFO | =================================================================
+2026-11-11 18:41:09,471 | INFO | INICIO: EXCEL, API, TRANSFORMACIÓN E INDICADORES
+2026-11-11 18:41:09,472 | INFO | =================================================================
+2026-11-11 18:41:09,473 | INFO | ETAPA 1/7: Excel y bronze de deserción
+2026-11-11 18:41:09,475 | INFO | Leyendo Exceloriginal: articles-415244_recurso_19.xlsx
+C:\Users\grues\OneDrive\Escritorio\etl_desercion\.venv\Lib\site-packages\openpyxl\reader\workbook.py:118: UserWarning: Print area cannot be set to Defined name: 'TAI - metodología'!$A:$K.
+  warn(f"Print area cannot be set to Defined name: {defn.value}.")
+C:\Users\grues\OneDrive\Escritorio\etl_desercion\.venv\Lib\site-packages\openpyxl\reader\workbook.py:118: UserWarning: Print area cannot be set to Defined name: 'TDCA - metodología'!$A:$L.
+  warn(f"Print area cannot be set to Defined name: {defn.value}.")
+C:\Users\grues\OneDrive\Escritorio\etl_desercion\.venv\Lib\site-packages\openpyxl\reader\workbook.py:118: UserWarning: Print area cannot be set to Defined name: 'TGA - metodología'!$A:$K.
+  warn(f"Print area cannot be set to Defined name: {defn.value}.")
+2026-11-11 18:41:11,143 | INFO | Hoja leída: TD - departamento
+2026-11-11 18:41:11,143 | INFO | Hoja exportada: C:\Users\grues\OneDrive\Escritorio\etl_desercion\data\bronze\excel_extraido\td_departamento.csv
+2026-11-11 18:41:11,144 | INFO | Bronze generado: bronze_desercion_departamento.csv
+2026-11-11 18:41:11,144 | INFO | Filas extraídas: 130
+2026-11-11 18:41:11,145 | INFO | Filas por nivel:
+nivel_formacion
+Tecnológico            33
+TyT                    33
+Técnico Profesional    31
+Universitario          33
+2026-11-11 18:41:11,145 | INFO | Excel original conservado sin modificar
+2026-11-11 18:41:11,145 | INFO | ETAPA 2/7: Reutilizando bronze departamental local
+2026-11-11 18:41:11,145 | INFO | ETAPA 3/7: Silver de deserción
+2026-11-11 18:41:11,148 | INFO | Iniciando transformación silver
+2026-11-11 18:41:11,240 | INFO | Silver anterior respaldado: silver_desercion_departamento_20261111_184111_234478.csv
+2026-11-11 18:41:11,262 | INFO | Silver generado: silver_desercion_departamento.csv
+2026-11-11 18:41:11,263 | INFO | Filas silver:1950
+2026-11-11 18:41:11,263 | INFO | Tasas reportadas: 1901
+2026-11-11 18:41:11,263 | INFO | Valores no aplica: 49
+2026-11-11 18:41:11,264 | INFO | Valores sin dato: 0
+2026-11-11 18:41:11,264 | INFO | Claves duplicadas: 0
+2026-11-11 18:41:11,264 | INFO | Ausentes respecto a Universitario: {'Universitario': [], 'TyT': [], 'Técnico Profesional': ['Guaviare', 'Vaupés'], 'Tecnológico': []}
+2026-11-11 18:41:11,265 | INFO | ETAPA 4/7: Silver de matrícula departamental
+2026-11-11 18:41:11,267 | INFO | Iniciando silver de matrícula departamental
+2026-11-11 18:41:11,345 | INFO | Filas bronze:1134
+2026-11-11 18:41:11,345 | INFO | Copias eliminadas: 567
+2026-11-11 18:41:11,345 | INFO | Registros separados por clave inválida: 6
+2026-11-11 18:41:11,346 | INFO | Filas departamento + año: 561
+2026-11-11 18:41:11,346 | INFO | Filas silver:1683
+2026-11-11 18:41:11,346 | INFO | Filas sin matrícula: 0
+2026-11-11 18:41:11,346 | INFO | Filas con decimales: 3
+2026-11-11 18:41:11,346 | INFO | Filas por revisar: 205
+2026-11-11 18:41:11,347 | INFO | Códigos con varios nombres: ['11', '44', '52', '88']
+2026-11-11 18:41:11,347 | INFO | Años disponibles: 2005–2021
+2026-11-11 18:41:11,352 | INFO | Catálogo territorial observado:
+codigo_departamento       departamento_matricula
+                 05                    ANTIOQUIA
+                 08                    ATLANTICO
+                 11                  BOGOTA D.C.
+                 11                   BOGOTA D.C
+                 11                 BOGOTA, D.C.
+                 13                      BOLIVAR
+                 15                       BOYACA
+                 17                       CALDAS
+                 18                      CAQUETA
+                 19                        CAUCA
+                 20                        CESAR
+                 23                      CORDOBA
+                 25                 CUNDINAMARCA
+                 27                        CHOCO
+                 41                        HUILA
+                 44                   LA GUAJIRA
+                 44                      GUAJIRA
+                 47                    MAGDALENA
+                 50                         META
+                 52                      NARINIO
+                 52                       NARINO
+                 54           NORTE DE SANTANDER
+                 63                      QUINDIO
+                 66                    RISARALDA
+                 68                    SANTANDER
+                 70                        SUCRE
+                 73                       TOLIMA
+                 76              VALLE DEL CAUCA
+                 81                       ARAUCA
+                 85                     CASANARE
+                 86                     PUTUMAYO
+                 88     SAN ANDRES Y PROVIDENCIA
+                 88           SAN ANDRES Y PROVI
+                 88           ARCHIPIELAGO DE SA
+                 88 ARCHIPIELAGO DE SAN ANDRES, PROVIDENCIA Y SANTA CATALINA
+                 91                     AMAZONAS
+                 94                      GUAINIA
+                 95                     GUAVIARE
+                 97                       VAUPES
+                 99                      VICHADA
+2026-11-11 18:41:11,353 | INFO | Silver departamental finalizado. No se sumaron matrículas.
+2026-11-11 18:41:11,354 | INFO | ETAPA 5/7: Integración
+2026-11-11 18:41:11,356 | INFO | Iniciando integración departamental
+2026-11-11 18:41:11,467 | INFO | Filas de deserción conservadas: 1950
+2026-11-11 18:41:11,467 | INFO | Filas con coincidencia de matrícula: 1164
+2026-11-11 18:41:11,467 | INFO | Filas sin coincidencia: 786
+2026-11-11 18:41:11,468 | INFO | Matrícula porrevisar en el cruce: 3
+2026-11-11 18:41:11,468 | INFO | Estados de integración: {'COINCIDENCIA_TECNICA': 1161, 'NIVEL_SIN_EQUIVALENCIA_DEFINIDA': 495, 'FUERA_COBERTURA_TEMPORAL': 291, 'MATRICULA_POR_REVISAR': 3}
+2026-11-11 18:41:11,468 | INFO | Integración guardada: silver_integrado.csv
+2026-11-11 18:41:11,469 | INFO | ETAPA 6/7: Gold, variaciones y ranking
+2026-11-11 18:41:11,471 | INFO | Iniciando gold integrado
+2026-11-11 18:41:11,566 | INFO | Gold anteriorrespaldado: gold_final_20261111_184111_562787.csv
+2026-11-11 18:41:11,652 | INFO | filas_gold: 1950
+2026-11-11 18:41:11,653 | INFO | tasas_disponibles: 1901
+2026-11-11 18:41:11,654 | INFO | observaciones_sin_tasa: 49
+2026-11-11 18:41:11,654 | INFO | coincidencias_matricula: 1164
+2026-11-11 18:41:11,655 | INFO | pares_sin_alertas_tecnicas: 1131
+2026-11-11 18:41:11,655 | INFO | variaciones_anuales_calculadas: 1762
+2026-11-11 18:41:11,655 | INFO | filas_seleccionadas_top20: 407
+2026-11-11 18:41:11,656 | INFO | Gold integrado finalizado
+2026-11-11 18:41:11,656 | INFO | No se realizócarga a base de datos
+2026-11-11 18:41:11,659 | INFO | ETAPA 7/7: Indicadores de entrega
+2026-11-11 18:41:11,661 | INFO | Generando indicadores de entrega
+2026-11-11 18:41:11,740 | INFO | Indicadores por nivel y año: 60 filas
+2026-11-11 18:41:11,741 | INFO | Archivo de indicadores: gold_indicadores_por_nivel_anio.csv
+2026-11-11 18:41:11,741 | INFO | Resumen de calidad: gold_resumen_calidad.csv
+2026-11-11 18:41:11,741 | INFO | No se estimaron tasas nacionales ponderadas, desertores ni permanencia.
+2026-11-11 18:41:11,742 | INFO | CARGA: validación de Gold y carga a PostgreSQL
+2026-11-11 18:41:11,742 | INFO | Iniciando validación de Gold
+2026-11-11 18:41:11,743 | INFO | Existencia: 7archivos encontrados
+2026-11-11 18:41:11,809 | INFO | Esquema: columnas esperadas presentes
+2026-11-11 18:41:11,839 | INFO | Claves: sin nulos y sin duplicados en las 5 tablas
+2026-11-11 18:41:11,848 | INFO | Rangos: tasas, porcentajes y matrículas en rango
+2026-11-11 18:41:11,860 | INFO | Consistencia:Silver, Gold e indicadores coinciden
+2026-11-11 18:41:11,860 | INFO | Registros en Gold final: 1950
+2026-11-11 18:41:11,861 | INFO | Registros duplicados detectados: 0
+2026-11-11 18:41:11,861 | INFO | Indicadores por nivel y año: 60 filas
+2026-11-11 18:41:11,861 | INFO | Validación deGold exitosa
+2026-11-11 18:41:11,863 | INFO | Iniciando carga de Gold a PostgreSQL (corrida manual_20261111_234111)
+2026-11-11 18:41:11,892 | ERROR | Falló la carga de Gold a PostgreSQL
+Traceback (most recent call last):
+  File "C:\Users\grues\OneDrive\Escritorio\etl_desercion\src\carga_dw.py", line 391, in ejecutar_carga
+    return cargar_gold(corrida)
+  File "C:\Users\grues\OneDrive\Escritorio\etl_desercion\src\carga_dw.py", line 357, in cargar_gold
+    conexion = conectar()
+  File "C:\Users\grues\OneDrive\Escritorio\etl_desercion\src\carga_dw.py", line 87, in conectar
+    raise EnvironmentError(
+    ...<2 lines>...
+    )
+OSError: Falta la variable de entorno DW_PASSWORD (se define en airflow-medallon/.env).
+2026-11-11 18:41:11,897 | ERROR | PIPELINE DETENIDO. No se completaron todas las etapas.
+Traceback (most recent call last):
+  File "C:\Users\grues\OneDrive\Escritorio\etl_desercion\main.py", line 125, in main
+    ejecutar_carga()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\grues\OneDrive\Escritorio\etl_desercion\src\carga_dw.py", line 391, in ejecutar_carga
+    return cargar_gold(corrida)
+  File "C:\Users\grues\OneDrive\Escritorio\etl_desercion\src\carga_dw.py", line 357, in cargar_gold
+    conexion = conectar()
+  File "C:\Users\grues\OneDrive\Escritorio\etl_desercion\src\carga_dw.py", line 87, in conectar
+    raise EnvironmentError(
+    ...<2 lines>...
+    )
+OSError: Falta la variable de entorno DW_PASSWORD (se define en airflow-medallon/.env).
+2026-11-11 18:41:11,898 | ERROR | Pueden permanecer salidas anteriores; no deben presentarse como una nueva ejecución completa.
+(.venv) PS C:\Users\grues\OneDrive\Escritorio\etl_desercion> 
