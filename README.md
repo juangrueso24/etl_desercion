@@ -128,7 +128,8 @@ etl_desercion/
 │   ├── CHECKLIST_EVIDENCIAS.md          # checklist del docente con su evidencia
 │   ├── EVIDENCIAS.md                    # capturas de pruebas, base de datos, API y dashboard
 │   ├── capturas/                        # imágenes de EVIDENCIAS.md
-│   └── FEEDBACK_USUARIOS.md             # feedback de usuarios y cambios (a completar)
+│   ├── FEEDBACK_USUARIOS.md             # feedback de usuarios y cambios
+│   └── Checklist-Proyecto_ETL_Juan_Jose_Grueso.docx  # checklist del docente diligenciado
 ├── test/                                # pruebas con pytest
 ├── src/
 │   ├── __init__.py
