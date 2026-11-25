@@ -1,0 +1,7 @@
+# colores del dashboard, streamlit lee este archivo al iniciar
+[theme]
+base = "light"
+primaryColor = "#2E86AB"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#E8F1F8"
+textColor = "#1F2933"

@@ -18,6 +18,11 @@ TASA = "Estudiantes que dejaron de estudiar (de cada 100)"
 # orden fijo de los niveles, los que no estén en gold se omiten
 ORDEN_NIVELES = ["Universitario", "TyT", "Técnico Profesional", "Tecnológico"]
 
+# colores de las graficas, cada seccion tiene el suyo
+COLOR_EVOLUCION = "#2E86AB"
+COLOR_RANKING = "#E4572E"
+COLOR_DEPARTAMENTO = "#7B2CBF"
+
 
 def coma(valor, decimales=1):
     # numero con coma decimal
@@ -79,7 +84,7 @@ def cargar_indicadores():
 def main():
     st.set_page_config(page_title="Deserción en la educación superior", layout="wide")
 
-    st.title("Deserción en la educación superior en Colombia")
+    st.title("Deserción en la educación superior en :orange[Colombia]")
     st.write(
         "¿Qué porcentaje de estudiantes deja de estudiar? Elige un nivel de "
         "formación y un año en el menú de la izquierda y mira cómo cambia."
@@ -143,7 +148,7 @@ def main():
     nivel_texto = nivel_en_frase(nivel)
 
     # 1. resumen
-    st.header(f"1. Resumen: {nivel}, {anio}")
+    st.header(f"1. Resumen: {nivel}, {anio}", divider="orange")
 
     if fila.empty or con_tasa.empty:
         st.warning("No hay datos de deserción para ese nivel y año.")
@@ -153,15 +158,16 @@ def main():
         menor = con_tasa.loc[con_tasa["tasa_desercion_porcentaje"].idxmin()]
 
         c1, c2, c3, c4 = st.columns(4)
-        c1.metric("Promedio de los departamentos", f"{coma(fila['tasa_media_simple_pct'])} %")
+        c1.metric("Promedio de los departamentos", f"{coma(fila['tasa_media_simple_pct'])} %", border=True)
         c1.caption("Promedio simple, no es la tasa de todo el país")
-        c2.metric("Tasa más alta", f"{coma(mayor['tasa_desercion_porcentaje'])} %")
-        c2.caption(mayor["departamento"])
-        c3.metric("Tasa más baja", f"{coma(menor['tasa_desercion_porcentaje'])} %")
-        c3.caption(menor["departamento"])
+        c2.metric("Tasa más alta", f"{coma(mayor['tasa_desercion_porcentaje'])} %", border=True)
+        c2.caption(f":red[{mayor['departamento']}]")
+        c3.metric("Tasa más baja", f"{coma(menor['tasa_desercion_porcentaje'])} %", border=True)
+        c3.caption(f":green[{menor['departamento']}]")
         c4.metric(
             "Lugares con dato",
             f"{int(fila['departamentos_con_tasa'])} de {int(fila['departamentos_presentes'])}",
+            border=True,
         )
 
         if int(fila["departamentos_presentes"]) == total_lugares:
@@ -178,7 +184,7 @@ def main():
         )
 
     # 2. evolucion por año
-    st.header(f"2. ¿Cómo ha cambiado con los años? ({nivel})")
+    st.header(f"2. ¿Cómo ha cambiado con los años? ({nivel})", divider="blue")
     st.write(
         "Cada punto de la línea es un año y muestra el promedio de los departamentos. "
         "Pasa el mouse sobre la línea para ver el dato exacto."
@@ -195,7 +201,9 @@ def main():
                 TASA: serie["tasa_media_simple_pct"].round(1).tolist(),
             }
         )
-        st.line_chart(evolucion, x="Año", y=TASA, x_label="Año", y_label=TASA)
+        st.line_chart(
+            evolucion, x="Año", y=TASA, x_label="Año", y_label=TASA, color=COLOR_EVOLUCION
+        )
 
         primero = serie.iloc[0]
         ultimo = serie.iloc[-1]
@@ -218,7 +226,7 @@ def main():
             )
 
     # 3. ranking de departamentos
-    st.header(f"3. ¿Dónde hay más deserción? ({nivel}, {anio})")
+    st.header(f"3. ¿Dónde hay más deserción? ({nivel}, {anio})", divider="red")
     st.write(
         "Los 10 lugares con más deserción ese año: cuanto más alta la barra, "
         "más estudiantes de cada 100 dejaron de estudiar."
@@ -235,7 +243,15 @@ def main():
             }
         )
         # de mayor a menor, si no streamlit ordena las barras por nombre
-        st.bar_chart(barras, x="Departamento", y=TASA, x_label="Departamento", y_label=TASA, sort=f"-{TASA}")
+        st.bar_chart(
+            barras,
+            x="Departamento",
+            y=TASA,
+            x_label="Departamento",
+            y_label=TASA,
+            sort=f"-{TASA}",
+            color=COLOR_RANKING,
+        )
 
         siguientes = [
             f"{fila_top['departamento']} ({coma(fila_top['tasa_desercion_porcentaje'])})"
@@ -267,7 +283,16 @@ def main():
         if top["matricula_reportada"].notna().any():
             detalle["Estudiantes matriculados (reportados)"] = top["matricula_reportada"].tolist()
 
-        st.dataframe(detalle, hide_index=True)
+        # barra de color dentro de la tabla para ver rapido cuanto es mas alto
+        st.dataframe(
+            detalle,
+            hide_index=True,
+            column_config={
+                TASA: st.column_config.ProgressColumn(
+                    format="%.1f", min_value=0, max_value=max(float(detalle[TASA].max()), 1.0)
+                )
+            },
+        )
 
         if not top["matricula_reportada"].notna().any():
             if anio > ultimo_anio_matricula:
@@ -283,7 +308,7 @@ def main():
             st.caption(aviso)
 
     # 4. un departamento
-    st.header("4. Mira un departamento en particular")
+    st.header("4. Mira un departamento en particular", divider="violet")
     st.write(
         "Elige un departamento (o Bogotá D.C.) para ver, año por año, cuántos de cada 100 "
         f"estudiantes dejaron de estudiar allí (nivel {nivel_texto})."
@@ -307,7 +332,9 @@ def main():
                 TASA: historia["tasa_desercion_porcentaje"].round(1).tolist(),
             }
         )
-        st.line_chart(linea, x="Año", y=TASA, x_label="Año", y_label=TASA)
+        st.line_chart(
+            linea, x="Año", y=TASA, x_label="Año", y_label=TASA, color=COLOR_DEPARTAMENTO
+        )
 
         inicio = historia.iloc[0]
         fin = historia.iloc[-1]
