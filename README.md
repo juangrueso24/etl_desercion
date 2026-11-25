@@ -509,7 +509,7 @@ Lo que no se puede saber con estos datos: la matrícula solo llega hasta 2021, p
 - Los promedios simples no son tasas nacionales ponderadas.
 - El notebook evalúa las diez preguntas originales y no declara alcanzado el 90 % cuando faltan datos.
 
-La directriz técnica Excel + API, transformación, JOIN, gold e indicadores está implementada en código. La evidencia final requiere ejecutar y guardar el notebook. Esto no equivale a cumplir todos los objetivos amplios del Avance 1: los que requieren otras fuentes siguen pendientes o necesitan reformulación aprobada por el docente.
+La directriz técnica Excel + API, transformación, JOIN, gold e indicadores está implementada en código. El notebook `notebooks/analisis_gold.ipynb` está ejecutado y guardado con sus resultados. Esto no equivale a cumplir todos los objetivos amplios del Avance 1: los que requieren otras fuentes siguen pendientes o necesitan reformulación aprobada por el docente.
 
 ## Entrega y control de versiones
 Incluir código activo, requirements, README, notebook ejecutado y las entradas/salidas requeridas para reproducir y evaluar. No incluir `.venv` ni `__pycache__`.
