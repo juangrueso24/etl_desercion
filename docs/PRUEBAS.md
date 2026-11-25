@@ -118,7 +118,7 @@ Se hacen en el entorno real (Docker, navegador). Cada una debe quedar con su cap
 
 ## Registro de correcciones
 
-Errores encontrados al probar la orquestación y la carga, su corrección y la prueba que los verifica. Agrega aquí los que aparezcan en las pruebas manuales y con usuarios.
+Errores encontrados al probar la orquestación, la carga y el dashboard con usuarios, su corrección y la prueba que los verifica.
 
 | # | Error encontrado | Corrección | Prueba que lo verifica |
 |---|---|---|---|
