@@ -1,4 +1,4 @@
-# Pruebas técnicas — registro de casos, resultados esperados y obtenidos
+# Pruebas técnicas: registro de casos, resultados esperados y obtenidos
 
 Proyecto: ETL de deserción y matrícula en educación superior (Excel + API → Bronze → Silver → Gold → PostgreSQL; Gold → API → dashboard).
 

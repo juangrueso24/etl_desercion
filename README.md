@@ -411,7 +411,7 @@ Archivo: `data/gold/gold_indicadores_por_nivel_anio.csv` (una fila por nivel de 
 | Cobertura del cruce (`cobertura_cruce_pct`) | Proporción de departamentos cuya clave coincide con la matrícula | `coincidencias_matricula / departamentos_presentes × 100` | `coincidencias_matricula`, `departamentos_presentes` | 100 % |
 
 ## Ejecución local verificada
-Resultados compartidos del 17 de octubre de 2026, 15:43:
+Resultados de una ejecución local del 17 de octubre de 2026, 15:43:
 
 | Resultado | Cantidad |
 |---|---:|

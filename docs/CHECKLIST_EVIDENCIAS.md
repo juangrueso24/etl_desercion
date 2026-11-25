@@ -1,4 +1,4 @@
-# Checklist del docente — estado y evidencia
+# Checklist del docente: estado y evidencia
 
 Este documento responde el checklist del proyecto ETL punto por punto, con la evidencia que está en el repositorio.
 
